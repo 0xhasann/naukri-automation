@@ -1,0 +1,30 @@
+# Build
+target/
+*.class
+*.log
+logs/
+
+# Runtime state - never commit application history, screenshots or reports
+data/
+screenshots/
+reports/
+test-output/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Never commit secrets. Credentials come from NAUKRI_USERNAME / NAUKRI_PASSWORD env vars.
+.env
+*.env
+credentials.*
+!credentials.properties.example

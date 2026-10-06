@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="naukri-automation-unit" verbose="1">
+    <test name="Unit tests (no browser)">
+        <classes>
+            <class name="com.jobautomation.tests.unit.ConfigAndProfileTest"/>
+            <class name="com.jobautomation.tests.unit.JobMatcherTest"/>
+            <class name="com.jobautomation.tests.unit.SkillMatcherTest"/>
+            <class name="com.jobautomation.tests.unit.ExperienceMatcherTest"/>
+            <class name="com.jobautomation.tests.unit.LocationMatcherTest"/>
+            <class name="com.jobautomation.tests.unit.SalaryMatcherTest"/>
+            <class name="com.jobautomation.tests.unit.QuestionAnswerServiceTest"/>
+            <class name="com.jobautomation.tests.unit.DailyLimitServiceTest"/>
+            <class name="com.jobautomation.tests.unit.DuplicateCheckServiceTest"/>
+        </classes>
+    </test>
+</suite>

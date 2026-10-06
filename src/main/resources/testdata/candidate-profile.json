@@ -1,0 +1,96 @@
+{
+  "_ctcNote": "currentSalaryLpa: user said 'more than 20' - forms need an exact number, so it stays null until filled in. noticePeriodDays: unknown (employed, not serving notice) - fill in the real days.",
+  "_comment": "Source of truth for every application answer. Built from Mahboob_Hasan_Resume.pdf. null = NOT KNOWN: the automation will STOP an application that requires it instead of guessing. Fill values only if they are true.",
+
+  "name": "Mahboob Hasan",
+  "email": "hasanmahboob059@gmail.com",
+  "phone": "+91 9889130531",
+  "linkedin": "linkedin.com/in/0xhasann",
+  "github": "github.com/0xhasann",
+
+  "currentTitle": "Software Engineer",
+  "targetRole": "Java Developer",
+  "targetRoles": [
+    "Java Developer",
+    "Java Backend Developer",
+    "Java Software Engineer",
+    "Java Engineer",
+    "Backend Engineer",
+    "Java Spring Boot Developer",
+    "Java Microservices Developer",
+    "Software Engineer - Java",
+    "Software Development Engineer - Java",
+    "Senior Java Developer"
+  ],
+
+  "_experienceNote": "Resume: DXC Nov 2021-May 2022, M2P Fintech Jun 2022-Jan 2025, OneAssist Jan 2025-Jul 2025 = ~3.7 years. Search filter targets 4+ but application answers use these verified numbers.",
+  "totalExperienceYears": 3.7,
+  "relevantJavaExperienceYears": 3.7,
+  "experienceTarget": 4,
+
+  "skillExperienceYears": {
+    "java": 3.7,
+    "spring boot": 3.7,
+    "microservices": 3.7,
+    "kafka": 3.1,
+    "redis": 3.1,
+    "mysql": 3.1,
+    "postgresql": 0.6,
+    "mongodb": 2.6,
+    "aws": 2.6,
+    "spring security": 2.6,
+    "junit": 3.7,
+    "mockito": 3.7,
+    "node.js": 2.6,
+    "typescript": 2.6,
+    "spring ai": 0.6,
+    "docker": null,
+    "jenkins": null,
+    "github actions": null
+  },
+
+  "_skillsNote": "Only technologies that appear on the resume. Anything not listed here is answered as NOT KNOWN, never as YES.",
+  "skills": [
+    "Java", "Java 8", "Java 11", "Java 17", "Java 21", "TypeScript", "C",
+    "Concurrency", "Distributed Systems", "Multithreading",
+    "Spring Boot", "Spring Security", "Spring AI", "Node.js", "Microservices", "REST APIs", "Event-Driven Architecture",
+    "LLMs", "Embeddings", "RAG", "AI Agents",
+    "MySQL", "PostgreSQL", "MongoDB", "Redis", "Kafka", "AWS SQS", "Dead Letter Queues",
+    "JUnit", "Mockito", "K6", "REST Assured", "JMeter",
+    "AWS", "EC2", "S3", "Docker", "GitHub Actions", "Jenkins", "CI/CD", "Git", "Linux", "Maven",
+    "Datadog", "Prometheus", "Grafana", "ELK Stack", "Kibana",
+    "WebRTC", "WebSockets", "JWT", "OAuth2",
+    "Payment Systems", "Fintech", "HSM", "KYC", "Multi-tenant Architecture"
+  ],
+
+  "domains": ["Fintech", "Payments", "Banking", "Insurance", "AI"],
+
+  "employmentHistory": [
+    { "title": "Software Engineer 2", "company": "OneAssist", "location": "Gurgaon", "from": "2025-01", "to": "2025-07" },
+    { "title": "Software Development Engineer", "company": "M2P Fintech", "location": "Chennai", "from": "2022-06", "to": "2025-01" },
+    { "title": "Application Engineer", "company": "DXC Technology", "location": "Bangalore", "from": "2021-11", "to": "2022-05" }
+  ],
+
+  "education": [
+    { "degree": "Master of Computer Application (MCA)", "institution": "Jamia Millia Islamia, New Delhi", "from": "2019-08", "to": "2022-07" }
+  ],
+  "highestQualification": "MCA",
+
+  "currentLocation": "Gurugram",
+  "preferredLocations": ["Bengaluru", "Hyderabad", "Pune", "Chennai", "Gurugram", "Delhi NCR", "Remote"],
+  "relocationWilling": true,
+  "immediateJoiner": true,
+  "noticePeriodDays": null,
+  "currentlyEmployed": true,
+
+  "minimumSalaryLpa": 20,
+  "expectedSalaryLpa": 22,
+  "currentSalaryLpa": null,
+
+  "workAuthorizationCountries": ["India"],
+  "requiresVisaSponsorship": false,
+
+  "dob": "1997-08-16",
+  "age": null,
+  "gender": "Male"
+}

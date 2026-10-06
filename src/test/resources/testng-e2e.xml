@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+  Browser suite. Requires NAUKRI_USERNAME / NAUKRI_PASSWORD in the environment.
+    mvn test -Dsuite=testng-e2e.xml -Dmode=DRY_RUN
+    mvn test -Dsuite=testng-e2e.xml -Dmode=TEST
+    mvn test -Dsuite=testng-e2e.xml -Dmode=LIVE
+-->
+<suite name="naukri-automation-e2e" verbose="1" parallel="false">
+    <test name="Smoke: login, search, matching" preserve-order="true">
+        <classes>
+            <class name="com.jobautomation.tests.e2e.LoginTest"/>
+            <class name="com.jobautomation.tests.e2e.JobSearchTest"/>
+            <class name="com.jobautomation.tests.e2e.JobMatchingTest"/>
+        </classes>
+    </test>
+    <test name="Pipeline run (mode from -Dmode)">
+        <classes>
+            <class name="com.jobautomation.tests.e2e.EasyApplyTest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,193 @@
+# =====================================================================
+#  Centralised selectors for Naukri.com
+#  Each key lists selectors in priority order. Prefix with "css=" or
+#  "xpath=". The first selector that resolves is used; if none resolve
+#  the page object screenshots, logs and safely aborts the current job.
+#  Naukri's generated class names change - update this file only.
+# =====================================================================
+
+login:
+  usernameField:
+    - "css=#usernameField"
+    - "css=input[placeholder*='Email'][type='text']"
+    - "xpath=//input[contains(@placeholder,'Email') or contains(@placeholder,'Username')]"
+  passwordField:
+    - "css=#passwordField"
+    - "css=input[type='password']"
+  submitButton:
+    - "css=button.loginButton"
+    - "css=button[type='submit']"
+    - "xpath=//button[normalize-space()='Login']"
+  errorMessage:
+    - "css=.server-error"
+    - "css=.erLbl"
+    - "xpath=//*[contains(@class,'error') and string-length(normalize-space())>0]"
+
+home:
+  loggedInIndicator:
+    - "css=.nI-gNb-drawer__icon-img"
+    - "css=img.nI-gNb-drawer__icon-img"
+    - "css=a[href*='/mnjuser/profile']"
+    - "css=.nI-gNb-menuItems a[href*='mnjuser']"
+  searchBox:
+    - "css=.nI-gNb-sb__placeholder"
+    - "css=input.suggestor-input"
+
+security:
+  # Anything that matches one of these means: STOP. Never solved, never bypassed.
+  # Only VISIBLE challenges count. An invisible reCAPTCHA badge or a "Login with OTP" link on the
+  # normal login page must NOT stop the run, so badges/links are deliberately not listed here.
+  captcha:
+    - "css=iframe[src*='recaptcha/api2/bframe']"
+    - "css=iframe[src*='hcaptcha'][src*='challenge']"
+    - "css=iframe[title*='challenge']"
+    - "css=img[src*='captcha']"
+    - "css=input[name*='captcha']"
+    - "css=input[id*='captcha']"
+    - "xpath=//*[self::label or self::p or self::span or self::div][contains(translate(normalize-space(text()),'CAPTCHA','captcha'),'enter the captcha') or contains(translate(normalize-space(text()),'CAPTCHA','captcha'),'solve the captcha')]"
+  otp:
+    - "css=input[name*='otp']"
+    - "css=input[id*='otp']"
+    - "css=input[placeholder*='OTP']"
+    - "css=input[autocomplete='one-time-code']"
+    - "xpath=//*[self::label or self::p or self::span or self::div][contains(translate(normalize-space(text()),'OTP','otp'),'enter otp') or contains(translate(normalize-space(text()),'OTP','otp'),'enter the otp') or contains(translate(normalize-space(text()),'OTP','otp'),'one time password')]"
+  accessDenied:
+    - "xpath=//*[contains(text(),'Access Denied') or contains(text(),'access denied')]"
+    - "xpath=//*[contains(text(),'unusual traffic') or contains(text(),'Unusual activity')]"
+    - "xpath=//*[contains(text(),'verify you are a human') or contains(text(),'Verify you are human')]"
+    - "css=#challenge-running"
+    - "css=.cf-challenge-running"
+
+results:
+  jobCard:
+    - "css=div.srp-jobtuple-wrapper"
+    - "css=article.jobTuple"
+    - "css=[data-job-id]"
+  jobId:                       # attribute read from the card
+    - "data-job-id"
+  title:
+    - "css=a.title"
+    - "css=h2 a"
+  company:
+    - "css=a.comp-name"
+    - "css=.comp-name"
+    - "css=a.subTitle"
+  location:
+    - "css=span.locWdth"
+    - "css=.loc span"
+    - "css=.location"
+  experience:
+    - "css=span.expwdth"
+    - "css=.exp span"
+    - "css=.experience"
+  salary:
+    - "css=span.sal-wrap span"
+    - "css=.sal span"
+    - "css=.salary"
+  noResults:
+    - "css=.styles_no-results__wrapper"
+    - "xpath=//*[contains(text(),'No jobs found') or contains(text(),'no results')]"
+  nextPage:
+    - "css=a.styles_btn-secondary__2AsIP[href*='-']:last-of-type"
+    - "xpath=//a[normalize-space()='Next']"
+
+details:
+  title:
+    - "css=h1[class*='jd-header-title']"
+    - "css=.jd-header-title"
+    - "css=h1"
+  company:
+    - "css=[class*='jd-header-comp-name'] a"
+    - "css=.jd-header-comp-name a"
+    - "css=[class*='comp-name']"
+  experience:
+    - "css=[class*='jhc__exp']"
+    - "css=.exp"
+  salary:
+    - "css=[class*='jhc__salary']"
+    - "css=.salary"
+  location:
+    - "css=[class*='jhc__location']"
+    - "css=.loc"
+  description:
+    - "css=[class*='JDC__dang-inner-html']"
+    - "css=.dang-inner-html"
+    - "css=[class*='job-desc']"
+  keySkills:
+    - "css=[class*='key-skill'] a"
+    - "css=.key-skill a"
+    - "css=[class*='chip']"
+  employmentType:
+    - "xpath=//*[contains(@class,'details')][.//label[contains(text(),'Employment Type')]]/span"
+    - "xpath=//label[contains(text(),'Employment Type')]/following-sibling::span"
+  easyApplyButton:
+    - "css=#apply-button"
+    - "css=button[id='apply-button']"
+    - "xpath=//button[normalize-space()='Apply']"
+  companySiteButton:            # 'Apply on company site' -> SKIPPED, not automated
+    - "css=#company-site-button"
+    - "xpath=//button[contains(normalize-space(),'company site')]"
+  alreadyApplied:
+    - "css=#already-applied"
+    - "xpath=//*[contains(@class,'already-applied') or contains(text(),'Already Applied') or contains(text(),'Applied')][self::span or self::button or self::div]"
+  loginToApply:
+    - "css=#login_Layer"
+    - "xpath=//button[contains(normalize-space(),'Login to apply')]"
+
+easyApply:
+  chatDrawer:
+    - "css=[class*='chatbot_DrawerContentWrapper']"
+    - "css=.chatbot_Drawer"
+    - "css=[class*='chatbot']"
+  botMessage:                   # each question the bot asks
+    - "css=[class*='chatbot_MessageContainer'] .botMsg"
+    - "css=.botMsg"
+    - "css=[class*='botMsg']"
+  lastBotMessage:
+    - "css=[class*='chatbot_MessageContainer'] .botMsg:last-of-type"
+    - "css=.botMsg:last-of-type"
+  textInput:
+    - "css=div.textArea[contenteditable='true']"
+    - "css=[class*='textArea'][contenteditable='true']"
+    - "css=div[contenteditable='true']"
+    - "css=input[type='text']:not([readonly])"
+  radioOptions:                 # single-choice buttons/labels
+    - "css=.ssrc__radio-btn-container label"
+    - "css=[class*='radio-btn-container'] label"
+    - "css=[class*='chatbot_ListItem'] label"
+    - "css=input[type='radio'] + label"
+  checkboxOptions:
+    - "css=.ssrc__checkbox-btn-container label"
+    - "css=[class*='checkbox-btn-container'] label"
+    - "css=input[type='checkbox'] + label"
+  dropdown:
+    - "css=select"
+    - "css=[class*='dropdown']"
+  suggestionChips:              # 'Yes' / 'No' style suggestion chips
+    - "css=[class*='chatbot_SuggestionContainer'] [class*='chip']"
+    - "css=.chatbot_Chip"
+  saveButton:
+    - "css=div.sendMsg"
+    - "css=[class*='sendMsg']"
+    - "css=div.sendMsgbtn_container div"
+    - "xpath=//div[normalize-space()='Save']"
+    - "xpath=//button[normalize-space()='Save']"
+  submitButton:                 # only clicked in LIVE mode
+    - "xpath=//button[normalize-space()='Submit']"
+    - "css=button[type='submit']"
+  closeButton:
+    - "css=[class*='chatbot_Header'] [class*='crossIcon']"
+    - "css=.crossIcon"
+    - "css=[class*='close']"
+  requiredFieldError:
+    - "css=[class*='error']"
+    - "xpath=//*[contains(text(),'required') or contains(text(),'mandatory')]"
+
+confirmation:
+  success:
+    - "css=.apply-message"
+    - "css=[class*='apply-message']"
+    - "xpath=//*[contains(text(),'successfully applied') or contains(text(),'Successfully applied') or contains(text(),'successfully sent') or contains(text(),'has been sent') or contains(text(),'Application sent')]"
+    - "css=#already-applied"
+  failure:
+    - "xpath=//*[contains(text(),'could not be submitted') or contains(text(),'Something went wrong') or contains(text(),'try again')]"

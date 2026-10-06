@@ -1,0 +1,211 @@
+# =====================================================================
+#  Naukri Java Developer automation - main configuration
+#  Every value here can be overridden with a JVM system property of the
+#  same name, e.g.  -DdailyApplicationLimit=10  -Dheadless=true
+#  Credentials are NEVER stored here: NAUKRI_USERNAME / NAUKRI_PASSWORD
+#  must be exported as environment variables.
+# =====================================================================
+
+browser: chrome
+headless: false
+
+# DRY_RUN  -> search + score only, never opens Easy Apply
+# TEST     -> walks through Easy Apply, fills safe fields, NEVER submits
+# LIVE     -> real applications, daily limit enforced
+# Override at runtime with -Dmode=...
+mode: DRY_RUN
+
+baseUrl: https://www.naukri.com
+
+# ------------------------------------------------------------------ limits
+dailyApplicationLimit: 50 # hard stop for LIVE mode, persisted across restarts
+maxJobsPerSearch: 40 # listings to inspect per keyword/city combination
+maxSearchPagesPerKeyword: 2 # result pages to walk per keyword
+minStrongMatchesPerCity: 8 # move to the next city once fewer than this remain eligible
+maxUnknownQuestionsBeforeStop: 5 # repeated unknown mandatory questions -> stop the run
+maxConsecutiveFailuresBeforeStop: 8 # consecutive job-level failures -> stop the run (browser likely broken)
+manualInterventionWaitMinutes: 10 # on CAPTCHA/OTP (non-headless): wait this long for YOU to complete it in the open browser, then resume; 0 = stop immediately
+
+# ------------------------------------------------------------------ matching
+matching:
+  eligibleScore: 75 # >= eligible -> apply
+  reviewScore: 60 # reviewScore..eligibleScore-1 -> REQUIRES_MANUAL_REVIEW (or apply if allowReviewBandApplications)
+  allowReviewBandApplications: false
+  weights: # must add up to 100
+    role: 25
+    javaBackend: 25
+    springMicroservices: 15
+    databaseMessaging: 10
+    cloudDevops: 10
+    experience: 10
+    location: 5
+
+minimumSalaryLpa: 9 # jobs disclosing LESS than this are rejected; undisclosed salary is NOT rejected
+rejectUndisclosedSalary: false
+
+targetExperience:
+  minimum: 3 # SEARCH filter only; application answers always use candidate-profile.json
+  maximum: 5
+
+# ------------------------------------------------------------------ search strategy
+# Bangalore -> Hyderabad -> Delhi NCR -> Pune first; then the rest of India dynamically.
+locationPriority:
+  - Bengaluru
+  - Hyderabad
+  - Delhi NCR
+  - Pune
+  - Chennai
+  - Gurugram
+  - Noida
+  - Mumbai
+  - Remote
+  - India
+
+# Naukri URL slugs for each location (used to build search URLs)
+locationSlugs:
+  Bengaluru: bengaluru
+  Hyderabad: hyderabad
+  Pune: pune
+  Chennai: chennai
+  Gurugram: gurugram
+  Delhi NCR: delhi-ncr
+  Noida: noida
+  Mumbai: mumbai
+  Remote: remote
+  India: india
+
+# Rotated per city, in this order. Combinations change automatically; a city is left
+# when fewer than minStrongMatchesPerCity strong matches turned up after 4 searches.
+searchKeywords:
+  - Java Developer
+  - Java Backend Developer
+  - Java Developer Spring Boot
+  - Java Backend Developer Microservices
+  - Java Spring Boot Microservices
+  - Java Developer Kafka
+  - Java Developer Redis
+  - Java Kafka Redis
+  - Java Developer AWS
+  - Java AWS Microservices
+  - Java Developer PostgreSQL
+  - Java Developer Distributed Systems
+  - Java Developer Fintech
+  - Java Payment Systems
+  - Java Software Engineer
+  - Java Backend Engineer
+  - Java Spring Boot Developer
+  - Java Microservices Developer
+  - Java Spring Boot MySQL
+
+preferredRoles:
+  - Java Developer
+  - Java Backend Developer
+  - Java Software Engineer
+  - Java Engineer
+  - Java Spring Boot Developer
+  - Java Microservices Developer
+  - Backend Engineer - Java
+  - Software Engineer - Java
+  - Software Development Engineer - Java
+  - Senior Java Developer
+  - Backend Engineer
+  - Backend Developer
+  - Software Engineer
+  - SDE
+
+# A title containing any of these is rejected outright (unless it also clearly says Java backend)
+rejectedRoleKeywords:
+  - manual tester
+  - qa tester
+  - qa engineer
+  - quality assurance
+  - automation tester
+  - automation engineer
+  - sdet
+  - test engineer
+  - tester
+  - software testing
+  - testing engineer
+  - test automation
+  - test lead
+  # - node.js developer
+  # - nodejs developer
+  # - node js developer
+  # - node developer
+  # - mean stack
+  - data analyst
+  - data scientist
+  - data engineer
+  - frontend
+  - front end
+  - front-end
+  - react developer
+  - angular developer
+  - mern
+  - devops engineer
+  - site reliability
+  - support engineer
+  - technical support
+  - customer support
+  - .net
+  - dotnet
+  - c#
+  - python developer
+  - php developer
+  - golang developer
+  - go developer
+  - ruby
+  - salesforce
+  - sap
+  - android developer
+  - ios developer
+  - flutter
+  - ui developer
+  - ux
+  - business analyst
+  - project manager
+  - scrum master
+  - intern
+  - trainee
+  - fresher
+
+# ------------------------------------------------------------------ company filter
+companies:
+  preferred: [] # e.g. [Razorpay, PhonePe, Flipkart] - get a small score bonus
+  blocked: [] # never applied to
+  # Listings whose company name or JD contains these are treated as staffing/spam and skipped
+  spamIndicators:
+    - abc
+    # - consultancy
+    # - consultants
+    # - manpower
+    # - staffing
+    # - placement
+    # - recruitment agency
+    # - hiring for our client
+    # - urgent requirement
+    # - walk-in
+    # - walkin
+    # - "pay and work"
+    # - "training and placement"
+    # - registration fee
+
+# ------------------------------------------------------------------ timeouts (seconds)
+timeouts:
+  pageLoad: 45
+  explicit: 20
+  short: 5
+  polling: 0.5
+
+# ------------------------------------------------------------------ retry policy for transient failures
+retry:
+  maxAttempts: 3
+  backoffMillis: 1500
+
+# ------------------------------------------------------------------ paths
+paths:
+  applicationHistory: data/application-history.json
+  screenshots: screenshots
+  reports: reports
+  candidateProfile: src/main/resources/testdata/candidate-profile.json
+  selectors: src/main/resources/config/selectors.yaml
