@@ -33,7 +33,7 @@ public class SalaryMatcher {
             if (config.isRejectUndisclosedSalary()) {
                 // return new Result(true, false, "Salary not disclosed and rejectUndisclosedSalary=true");
             }
-            return new Result(false, false, "Salary not disclosed");
+            // return new Result(false, false, "Salary not disclosed");
         }
         double max = job.getMaxSalaryLpa();
         // if (max < minimum) {
